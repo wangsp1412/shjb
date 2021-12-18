@@ -21,4 +21,5 @@ chmod +x fqfr.sh fqfrdr.sh fqfrdr2.sh fqrft.sh fqrk.sh fqrw.sh fqtx.sh fqzlm.sh 
 cd ~
 echo "cd ~/fqkk && ./run.sh" > fqkk.sh
 chmod +x fqkk.sh
+clear
 echo 番茄看看脚本已安装完毕，请关闭代理，或者关闭全局，或者分应用绕行Termux后，输入./fqkk.sh运行脚本
