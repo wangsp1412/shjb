@@ -19,7 +19,7 @@ echo "$(curl -s https://raw.githubusercontent.com/shoujiyanxishe/shjb/main/fqkk/
 echo "$(curl -s https://raw.githubusercontent.com/shoujiyanxishe/shjb/main/fqkk/run.sh)" > run.sh
 chmod +x fqfr.sh fqfrdr.sh fqfrdr2.sh fqrft.sh fqrk.sh fqrw.sh fqtx.sh fqzlm.sh joj.sh owa.sh owar.sh owsq.sh roj.sh run.sh
 cd ~
-echo "cd ~/fqkk && echo "$(curl -s https://raw.githubusercontent.com/shoujiyanxishe/shjb/main/fqkk/fqfrdr.sh)" > fqfrdr.sh && echo "$(curl -s https://raw.githubusercontent.com/shoujiyanxishe/shjb/main/fqkk/fqfrdr2.sh)" > fqfrdr2.sh && ./run.sh" > fqkk.sh
+echo "cd ~/fqkk && ./run.sh" > fqkk.sh
 chmod +x fqkk.sh
 clear
 echo 番茄看看脚本已安装完毕，请关闭代理，或者关闭全局，或者分应用绕行Termux后，输入./fqkk.sh运行脚本
