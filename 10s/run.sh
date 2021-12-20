@@ -9,7 +9,7 @@ echo $ck > ck.txt
 echo $ua > ua.txt
 echo $owsq > owsq.txt
 echo $ckP > ckP.txt
-rm -rf ckerror.txt
+rm -rf ckerror.txt rf.txt
 ./10srk.sh && ./10srw.sh && ./10sh.sh && ./owsq.sh
 if [ -s ckerror.txt ]; then
 echo $(cat ckerror.txt)
