@@ -6,8 +6,8 @@ cd ~/10s
 rm -rf 10sh.sh 10srk.sh 10srtdr.sh 10srtdr2.sh 10srw.sh 10stx.sh owa.sh owar.sh owsq.sh rpc.sh rsj.sh run.sh
 wget -N "https://raw.githubusercontent.com/shoujiyanxishe/shjb/main/10s/10sh.sh"
 wget -N "https://raw.githubusercontent.com/shoujiyanxishe/shjb/main/10s/10srk.sh"
-wget -N "https://raw.githubusercontent.com/shoujiyanxishe/shjb/main/10s/10srtdr.sh.sh"
-wget -N "https://raw.githubusercontent.com/shoujiyanxishe/shjb/main/10s/10srtdr2"
+wget -N "https://raw.githubusercontent.com/shoujiyanxishe/shjb/main/10s/10srtdr.sh"
+wget -N "https://raw.githubusercontent.com/shoujiyanxishe/shjb/main/10s/10srtdr2.sh"
 wget -N "https://raw.githubusercontent.com/shoujiyanxishe/shjb/main/10s/10srw.sh"
 wget -N "https://raw.githubusercontent.com/shoujiyanxishe/shjb/main/10s/10stx.sh"
 wget -N "https://raw.githubusercontent.com/shoujiyanxishe/shjb/main/10s/owa.sh"
