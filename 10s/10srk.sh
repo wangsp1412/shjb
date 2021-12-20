@@ -1,0 +1,1 @@
+echo $(curl -s http://h5.paike.pw/entry | grep -o "url_h52 .*" | cut -d '/' -f3) > rk.txt
