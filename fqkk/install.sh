@@ -1,26 +1,41 @@
 cd ~
-if [ ! -d "fqkk" ]; then
-mkdir fqkk
+read -p "如你确认已安装wget，请输入脚本地址开始安装脚本: " url
+echo $url > url.txt
+if [ $(grep -c "http" url.txt) -eq 0 ]; then
+rm -rf url.txt && echo 脚本地址未包含http://，请重新运行脚本
+elif [ $(grep -c "shoujiyanxishe" url.txt) -eq 0 ]; then
+rm -rf url.txt && echo 你确定这是我耳兔的脚本吗？别玩我了
+elif [ $(grep -c "install" url.txt) -eq 0 ]; then
+rm -rf url.txt && echo 真粗心，这可不是安装的脚本地址哦
 fi
-cd ~/fqkk
-rm -rf fqfr.sh fqfrdr.sh fqfrdr2.sh fqrft.sh fqrk.sh fqrw.sh fqtx.sh fqzlm.sh joj.sh owa.sh owar.sh owsq.sh roj.sh run.sh
-wget -N "https://raw.githubusercontent.com/shoujiyanxishe/shjb/main/fqkk/fqfr.sh"
-wget -N "https://raw.githubusercontent.com/shoujiyanxishe/shjb/main/fqkk/fqfrdr.sh"
-wget -N "https://raw.githubusercontent.com/shoujiyanxishe/shjb/main/fqkk/fqfrdr2.sh"
-wget -N "https://raw.githubusercontent.com/shoujiyanxishe/shjb/main/fqkk/fqrft.sh"
-wget -N "https://raw.githubusercontent.com/shoujiyanxishe/shjb/main/fqkk/fqrk.sh"
-wget -N "https://raw.githubusercontent.com/shoujiyanxishe/shjb/main/fqkk/fqrw.sh"
-wget -N "https://raw.githubusercontent.com/shoujiyanxishe/shjb/main/fqkk/fqtx.sh"
-wget -N "https://raw.githubusercontent.com/shoujiyanxishe/shjb/main/fqkk/fqzlm.sh"
-wget -N "https://raw.githubusercontent.com/shoujiyanxishe/shjb/main/fqkk/joj.sh"
-wget -N "https://raw.githubusercontent.com/shoujiyanxishe/shjb/main/fqkk/owa.sh"
-wget -N "https://raw.githubusercontent.com/shoujiyanxishe/shjb/main/fqkk/owar.sh"
-wget -N "https://raw.githubusercontent.com/shoujiyanxishe/shjb/main/fqkk/owsq.sh"
-wget -N "https://raw.githubusercontent.com/shoujiyanxishe/shjb/main/fqkk/roj.sh"
-wget -N "https://raw.githubusercontent.com/shoujiyanxishe/shjb/main/fqkk/run.sh"
-chmod +x fqfr.sh fqfrdr.sh fqfrdr2.sh fqrft.sh fqrk.sh fqrw.sh fqtx.sh fqzlm.sh joj.sh owa.sh owar.sh owsq.sh roj.sh run.sh
+wurl=$(echo ${url%install*})
+wjj=$(echo ${wurl#*main/} | cut -d '/' -f1)
+if [ $(grep -c "github" url.txt) -eq 1 ]; then
+ls=$(echo ${wurl%/main/*})
+ck=$(echo ${ls#*com/})
+if [ ! -d "$wjj" ]; then
+mkdir $wjj
+fi
+echo https://github.com/$ck/tree/main/$wjj > ~/$wjj/curl.txt
+elif [ $(grep -c "gitee" url.txt) -eq 1 ]; then
+ls=$(echo ${wurl%/raw/*})
+ck=$(echo ${ls#*com/})
+if [ ! -d "$wjj" ]; then
+mkdir $wjj
+fi
+echo https://gitee.com/$ck/tree/main/$wjj > ~/$wjj/curl.txt
+fi
+cd ~/$wjj
+jbm=$(echo $(curl -s $(cat curl.txt) | grep -o "shoujiyanxishe/shjb/blob.*" | cut -d '"' -f1 | cut -d '/' -f6))
+rm -rf $jbm
+echo $(curl -s $(cat curl.txt) | grep -o "shoujiyanxishe/shjb/blob.*" | cut -d '"' -f1 | cut -d '/' -f6 | sed 's#^#wget '''$wurl'''&#g') > wjb.sh
+chmod +x wjb.sh
+./wjb.sh
+chmod +x $jbm
+rm -rf curl.txt install.sh wjb.sh
 cd ~
-echo "cd ~/fqkk && ./run.sh" > fqkk.sh
-chmod +x fqkk.sh
+rm -rf url.txt
+echo "cd ~/$wjj && ./run.sh" > $wjj.sh
+chmod +x $wjj.sh
 clear
-echo 番茄看看脚本已安装完毕，请关闭代理，或者关闭全局，或者分应用代理绕行Termux后，输入 ./fqkk.sh 运行脚本，注意：当天首次执行脚本需要手动阅读3次抓到的包才能使用脚本！！！
+echo 脚本已安装完毕，请输入 ./$wjj.sh 运行脚本
