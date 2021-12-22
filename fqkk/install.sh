@@ -29,9 +29,9 @@ fi
 echo https://gitee.com/$ck/tree/main/$wjj > ~/$wjj/curl.txt
 fi
 cd ~/$wjj
-jbm=$(echo $(curl -s $(cat curl.txt) | grep -o "shoujiyanxishe/shjb/blob.*" | cut -d '"' -f1 | cut -d '/' -f6))
+jbm=$(echo $(curl -s $(cat curl.txt) | grep -o "$ck/blob.*" | cut -d '"' -f1 | cut -d '/' -f6))
 rm -rf $jbm
-echo $(curl -s $(cat curl.txt) | grep -o "shoujiyanxishe/shjb/blob.*" | cut -d '"' -f1 | cut -d '/' -f6 | sed 's#^#wget '''$wurl'''&#g') > wjb.sh
+echo "$(curl -s $(cat curl.txt) | grep -o "$ck/blob.*" | cut -d '"' -f1 | cut -d '/' -f6 | sed 's#^#wget '''$wurl'''&#g')" > wjb.sh
 chmod +x wjb.sh
 ./wjb.sh
 chmod +x $jbm
