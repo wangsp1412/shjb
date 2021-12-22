@@ -1,9 +1,9 @@
 cd ~
 read -p "如你确认已安装wget，请输入脚本地址开始安装脚本: " url
 echo $url > url.txt
-if [ $(grep -c "http" url.txt) -eq 0 ]
+if [ $(grep -c "https://" url.txt) -eq 0 ]
 then rm -rf url.txt
-echo 脚本地址未包含http://，请重新运行脚本
+echo 脚本地址未包含https://，请重新运行脚本
 elif [ $(grep -c "raw" url.txt) -eq 0 ]
 then rm -rf url.txt
 echo 脚本地址不是包含raw的直链，请重新运行脚本
@@ -15,7 +15,7 @@ then rm -rf url.txt
 echo 真粗心，这可不是安装脚本的地址哦
 fi
 if [ -s url.txt ]
-then wurl=$(echo ${url%install*})
+then wurl=$(echo ${url%install*} | grep -o "https://.*")
 wjj=$(echo ${wurl#*main/} | cut -d '/' -f1)
 if [ $(grep -c "github" url.txt) -eq 1 ]
 then ls=$(echo ${wurl%/main/*})
