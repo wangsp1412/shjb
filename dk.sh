@@ -5,8 +5,8 @@ then if [ $(ls ~/$wjj | wc -l) -ne 0 ]
 then read -p "请输入需要多开的脚本个数: " dks
 js=$(ls | sed "s/^$wjj//" | awk 'BEGIN {max = 0} {if ($1+0 > max+0) max=$1} END {print max}')
 xs=$((js+1))
-zhs=$((js+dks))
-for ((n=$xs; n<=$zhs; n++))
+zhs=$((js+dks+1))
+for ((n=xs; n<zhs; n++))
 do echo cp -r ~/$wjj ~/$wjj$n >> dk.sh
 echo "cd ~/$wjj$n
 ./run.sh" > $wjj$n.sh
