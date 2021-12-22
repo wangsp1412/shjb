@@ -1,24 +1,45 @@
 cd ~
-if [ ! -d "10s" ]; then
-mkdir 10s
+read -p "如你确认已安装wget，请输入脚本地址开始安装脚本: " url
+echo $url > url.txt
+if [ $(grep -c "http" url.txt) -eq 0 ]
+then rm -rf url.txt && echo 脚本地址未包含http://，请重新运行脚本
+elif [ $(grep -c "raw" url.txt) -eq 0 ]
+then rm -rf url.txt && echo 脚本地址不是包含raw的直链，请重新运行脚本
+elif [ $(grep -c "shoujiyanxishe" url.txt) -eq 0 ]
+then rm -rf url.txt && echo 你确定这是我耳兔的脚本吗？别玩我了
+elif [ $(grep -c "install" url.txt) -eq 0 ]
+then rm -rf url.txt && echo 真粗心，这可不是安装脚本的地址哦
 fi
-cd ~/10s
-rm -rf 10sh.sh 10srk.sh 10srtdr.sh 10srtdr2.sh 10srw.sh 10stx.sh owa.sh owar.sh owsq.sh rpc.sh rsj.sh run.sh
-wget -N "https://raw.githubusercontent.com/shoujiyanxishe/shjb/main/10s/10sh.sh"
-wget -N "https://raw.githubusercontent.com/shoujiyanxishe/shjb/main/10s/10srk.sh"
-wget -N "https://raw.githubusercontent.com/shoujiyanxishe/shjb/main/10s/10srtdr.sh"
-wget -N "https://raw.githubusercontent.com/shoujiyanxishe/shjb/main/10s/10srtdr2.sh"
-wget -N "https://raw.githubusercontent.com/shoujiyanxishe/shjb/main/10s/10srw.sh"
-wget -N "https://raw.githubusercontent.com/shoujiyanxishe/shjb/main/10s/10stx.sh"
-wget -N "https://raw.githubusercontent.com/shoujiyanxishe/shjb/main/10s/owa.sh"
-wget -N "https://raw.githubusercontent.com/shoujiyanxishe/shjb/main/10s/owar.sh"
-wget -N "https://raw.githubusercontent.com/shoujiyanxishe/shjb/main/10s/owsq.sh"
-wget -N "https://raw.githubusercontent.com/shoujiyanxishe/shjb/main/10s/rpc.sh"
-wget -N "https://raw.githubusercontent.com/shoujiyanxishe/shjb/main/10s/rsj.sh"
-wget -N "https://raw.githubusercontent.com/shoujiyanxishe/shjb/main/10s/run.sh"
-chmod +x 10sh.sh 10srk.sh 10srtdr.sh 10srtdr2.sh 10srw.sh 10stx.sh owa.sh owar.sh owsq.sh rpc.sh rsj.sh run.sh
+if [ -s url.txt ]
+then wurl=$(echo ${url%install*})
+wjj=$(echo ${wurl#*main/} | cut -d '/' -f1)
+if [ $(grep -c "github" url.txt) -eq 1 ]
+then ls=$(echo ${wurl%/main/*})
+ck=$(echo ${ls#*com/})
+if [ ! -d "$wjj" ]
+then mkdir $wjj
+fi
+echo https://github.com/$ck/tree/main/$wjj > ~/$wjj/curl.txt
+elif [ $(grep -c "gitee" url.txt) -eq 1 ]
+then ls=$(echo ${wurl%/raw/*})
+ck=$(echo ${ls#*com/})
+if [ ! -d "$wjj" ]
+then mkdir $wjj
+fi
+echo https://gitee.com/$ck/tree/main/$wjj > ~/$wjj/curl.txt
+fi
+cd ~/$wjj
+jbm=$(echo $(curl -s $(cat curl.txt) | grep -o "shoujiyanxishe/shjb/blob.*" | cut -d '"' -f1 | cut -d '/' -f6))
+rm -rf $jbm
+echo $(curl -s $(cat curl.txt) | grep -o "shoujiyanxishe/shjb/blob.*" | cut -d '"' -f1 | cut -d '/' -f6 | sed 's#^#wget '''$wurl'''&#g') > wjb.sh
+chmod +x wjb.sh
+./wjb.sh
+chmod +x $jbm
+rm -rf curl.txt install.sh wjb.sh
 cd ~
-echo "cd ~/10s && ./run.sh" > 10s.sh
-chmod +x 10s.sh
+rm -rf url.txt
+echo "cd ~/$wjj && ./run.sh" > $wjj.sh
+chmod +x $wjj.sh
 clear
-echo 10秒阅读脚本已安装完毕，请关闭代理，或者关闭全局，或者分应用代理绕行Termux后，输入 ./10s.sh 运行脚本，注意：当天首次执行脚本需要手动阅读3次抓到的包才能使用脚本！！！
+echo 脚本已安装完毕，请输入 ./$wjj.sh 运行脚本
+fi
