@@ -42,6 +42,6 @@ chmod +x $jbm
 rm -rf curl.txt install.sh wjb.sh
 cd ~
 rm -rf url.txt
-./$wjj/dk.sh
+./$wjj/$wjj.sh
 rm -rf $wjj
 fi
