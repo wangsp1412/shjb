@@ -23,7 +23,7 @@ sleep 0
 done
 chmod +x dk.sh
 ./dk.sh
-rm -rf dk.sh ~/jbdk
+rm -rf ~/jbdk
 clear
 echo $wjj多开$dks个已完成，输入 ls 查看
 else clear
@@ -40,7 +40,7 @@ then read -p "请输入需要删除的脚本文件夹名: " wjj
 if [ -n "$wjj" ]
 then xswj=$(ls | grep -o "$wjj.*")
 gs=$(ls | grep -o "$wjj.*" | wc -l)
-rm -rf $xswj
+rm -rf $xswj ~/jbdk
 clear
 echo 含有$wjj的文件及文件夹共计$gs个已全部删除
 else clear
