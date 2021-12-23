@@ -17,6 +17,7 @@ chmod +x dk.sh
 ./dk.sh
 rm -rf dk.sh
 echo $wjj多开$dks个已完成，输入 ls 查看
+rm -rf ~/jbdk
 else echo $wjj内无脚本文件，请完整下载$wjj脚本
 fi
 else echo 未找到$wjj文件夹，请先完整下载$wjj脚本
