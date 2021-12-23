@@ -42,8 +42,8 @@ chmod +x $jbm
 rm -rf curl.txt install.sh wjb.sh
 cd ~
 rm -rf url.txt
-cd ~/$wjj
-./$wjj.sh
-cd ~
-rm -rf $wjj
+echo "cd ~/$wjj
+./$wjj.sh" > $wjj.sh
+chmod +x $wjj.sh
+echo $wjj已安装成功，请输入 $wjj.sh 启动
 fi
