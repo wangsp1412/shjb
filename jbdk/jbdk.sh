@@ -25,7 +25,7 @@ sleep 0
 done
 chmod +x dk.sh
 ./dk.sh
-rm -rf ~/jbdk jbdk.sh
+rm -rf ~/jbdk jbdk.sh dk.sh
 clear
 echo $wjj多开$dks个已完成，输入 ls 查看
 else clear
