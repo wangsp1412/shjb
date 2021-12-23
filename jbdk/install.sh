@@ -46,5 +46,5 @@ echo "cd ~/$wjj
 ./$wjj.sh" > $wjj.sh
 chmod +x $wjj.sh
 clear
-echo $wjj已安装成功，请输入 ./$wjj.sh 启动
+echo 脚本已安装完毕，请输入 ./$wjj.sh 运行脚本
 fi
