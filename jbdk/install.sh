@@ -45,5 +45,5 @@ rm -rf url.txt
 echo "cd ~/$wjj
 ./$wjj.sh" > $wjj.sh
 chmod +x $wjj.sh
-echo $wjj已安装成功，请输入 $wjj.sh 启动
+echo $wjj已安装成功，请输入 ./$wjj.sh 启动
 fi
