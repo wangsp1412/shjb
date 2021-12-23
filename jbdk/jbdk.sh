@@ -23,14 +23,17 @@ sleep 0
 done
 chmod +x dk.sh
 ./dk.sh
-rm -rf dk.sh
+rm -rf dk.sh ~/jbdk
+clear
 echo $wjj多开$dks个已完成，输入 ls 查看
-rm -rf ~/jbdk
-else echo $wjj内无脚本文件，请完整下载$wjj脚本
+else clear
+echo $wjj内无脚本文件，请完整下载$wjj脚本
 fi
-else echo 未找到$wjj文件夹，请先完整下载$wjj脚本
+else clear
+echo 未找到$wjj文件夹，请先完整下载$wjj脚本
 fi
-else echo 没有输入内容
+else clear
+echo 没有输入内容
 fi
 elif [ $jbgl -eq 2 ]
 then read -p "请输入需要删除的脚本文件夹名: " wjj
@@ -40,12 +43,16 @@ gs=$(ls | grep -o "$wjj.*" | wc -l)
 rm -rf $xswj
 clear
 echo 含有$wjj的文件及文件夹共计$gs个已全部删除
-else echo 没有输入内容
+else clear
+echo 没有输入内容
 fi
 fi
-else echo 请输入 1 或 2
+else clear
+echo 请输入 1 或 2
 fi
-else echo 请输入数字
+else clear
+echo 请输入数字
 fi
-else echo 没有输入内容
+else clear
+echo 没有输入内容
 fi
