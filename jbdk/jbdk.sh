@@ -11,7 +11,9 @@ if [ -n "$wjj" ]
 then if [ $(ls | grep -o "$wjj.*" | wc -l) -ne 0 ]
 then if [ $(ls ~/$wjj | wc -l) -ne 0 ]
 then read -p "请输入需要多开的脚本个数: " dks
-js=$(ls | sed "s/^$wjj//" | grep -o "[0-9]" | awk 'BEGIN {max = 0} {if ($1+0 > max+0) max=$1} END {print max}')
+if [ -n "$dks" ]
+then if [[ $dks =~ ^[0-9]+$ ]]
+then js=$(ls | sed "s/^$wjj//" | grep -o "[0-9]" | awk 'BEGIN {max = 0} {if ($1+0 > max+0) max=$1} END {print max}')
 xs=$((js+1))
 zhs=$((js+dks))
 for ((n=xs; n<=zhs; n++))
@@ -26,6 +28,12 @@ chmod +x dk.sh
 rm -rf ~/jbdk
 clear
 echo $wjj多开$dks个已完成，输入 ls 查看
+else clear
+echo 请输入数字
+fi
+else clear
+echo 没有输入内容
+fi
 else clear
 echo $wjj内无脚本文件，请完整下载$wjj脚本
 fi
