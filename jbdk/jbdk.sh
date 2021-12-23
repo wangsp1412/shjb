@@ -1,6 +1,14 @@
 cd ~
-read -p "请输入需要多开的脚本文件夹名: " wjj
-if [ $(ls | grep -o "$wjj.*" | wc -l) -ne 0 ]
+read -p "输入 1 或 2 进行脚本管理
+1、多开脚本：复制脚本文件夹，独立储存脚本变量常量
+2、删除脚本：慎用，会删除主目录下包含输入内容的所有文件及文件夹: " jbgl
+if [ -n "$jbgl" ]
+then if [[ $jbgl =~ ^[0-9]+$ ]]
+then if [ $jbgl -eq 1 -o $jbgl -eq 2 ]
+then if [ $jbgl -eq 1 ]
+then read -p "请输入需要多开的脚本文件夹名: " wjj
+if [ -n "$wjj" ]
+then if [ $(ls | grep -o "$wjj.*" | wc -l) -ne 0 ]
 then if [ $(ls ~/$wjj | wc -l) -ne 0 ]
 then read -p "请输入需要多开的脚本个数: " dks
 js=$(ls | sed "s/^$wjj//" | grep -o "[0-9]" | awk 'BEGIN {max = 0} {if ($1+0 > max+0) max=$1} END {print max}')
@@ -21,4 +29,23 @@ rm -rf ~/jbdk
 else echo $wjj内无脚本文件，请完整下载$wjj脚本
 fi
 else echo 未找到$wjj文件夹，请先完整下载$wjj脚本
+fi
+else echo 没有输入内容
+fi
+elif [ $jbgl -eq 2 ]
+then read -p "请输入需要删除的脚本文件夹名: " wjj
+if [ -n "$wjj" ]
+then xswj=$(ls | grep -o "$wjj.*")
+gs=$(ls | grep -o "$wjj.*" | wc -l)
+rm -rf $xswj
+clear
+echo 含有$wjj的文件及文件夹共计$gs个已全部删除
+else echo 没有输入内容
+fi
+fi
+else echo 请输入 1 或 2
+fi
+else echo 请输入数字
+fi
+else echo 没有输入内容
 fi
