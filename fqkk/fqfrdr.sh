@@ -3,7 +3,12 @@ r=$(awk 'BEGIN{srand();printf "%.16f\n",rand()}')
 ua=$(cat ua.txt)
 ck=$(cat ck.txt)
 rw=$(cat rw.txt)
-curl -k -i --raw -o fqfrdr.txt "http://$rw/fast_reada/do_read?for=&zs=&pageshow&r=$r" -H "Host: $rw" -H "Proxy-Connection: keep-alive" -H "User-Agent: $ua" -H "X-Requested-With: XMLHttpRequest" -H "Accept: */*" -H "Cookie: $ck" -H "Referer: http://$rw/fast_reada/read" -H "Accept-Encoding: gunzip, deflate" -H "Accept-Language: zh-CN,zh;q=0.9,en-US;q=0.8,en;q=0.7" -s
+zlm=
+if [ -s zlm.txt ]
+then zlm=$(cat zlm.txt)
+zs=1
+fi
+curl -k -i --raw -o fqfrdr.txt "http://$rw/fast_reada/do_read?for=$zlm&zs=$zs&pageshow&r=$r" -H "Host: $rw" -H "Proxy-Connection: keep-alive" -H "User-Agent: $ua" -H "X-Requested-With: XMLHttpRequest" -H "Accept: */*" -H "Cookie: $ck" -H "Referer: http://$rw/fast_reada/read" -H "Accept-Encoding: gunzip, deflate" -H "Accept-Language: zh-CN,zh;q=0.9,en-US;q=0.8,en;q=0.7" -s
 jkey=$(cat fqfrdr.txt | grep -o "jkey.*" | cut -d '"' -f3)
 if [ -n "$jkey" ]
 then echo $jkey > jkey.txt
