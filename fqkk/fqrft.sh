@@ -21,7 +21,9 @@ msg=$(echo $msg1$msg2$msg3)
 else msg=$(cat fqrft.txt | grep -o "msg.*" | cut -d '"' -f3)
 fi
 dt=$(date '+%Y-%m-%d %H:%M:%S')
-zlg=$(cat zlg.txt)
+if [ -s zlm.txt ]
+then zlg=$(cat zlg.txt)
+fi
 echo $dt $zlg今日已阅读$n次，今日总奖励$s币，本小时剩余未阅读$(cat rest.txt)次，当前$(cat y.txt)可提现 $msg > rft.txt
 echo $status > status.txt
 fi
