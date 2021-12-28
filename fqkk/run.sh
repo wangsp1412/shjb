@@ -47,13 +47,15 @@ then echo $(cat ckerror.txt)
 fi
 fi
 ./owsq.sh
-zlm=$(cat zlm.txt)
+if [ -s zlm.txt ]
+then zlm=$(cat zlm.txt)
 if [ -n "$zlm" ]
 then ./fqzlm.sh
 if [ -s ckerror.txt ]
 then echo $(cat ckerror.txt)
 fi
 else rm -rf zlm.txt zlg.txt
+fi
 fi
 while sleep 8
 do
