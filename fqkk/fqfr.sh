@@ -7,7 +7,13 @@ then echo $(cat fqfr.txt | grep -o 'userinfo-score".*' | cut -d ':' -f2 | cut -d
 if [ $(grep -c "." b.txt) -eq 1 ]
 then echo $(cat b.txt | cut -d '.' -f1) > b.txt
 fi
-echo $(($(cat b.txt)/100)).$(($(cat b.txt)%100)) > y.txt
+a=$(($(cat b.txt)/100))
+zz=$(($(cat b.txt)%100))
+if [ $zz -lt 10 ]
+then c=0$zz
+else c=$zz
+fi
+echo $a.$c > y.txt
 else dt=$(date '+%Y-%m-%d %H:%M:%S')
 echo $dt ck无效，请重新运行脚本并输入新的常量 > ckerror.txt
 fi
