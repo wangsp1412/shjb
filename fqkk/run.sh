@@ -5,10 +5,12 @@ then read -p "请输入ck: " ck
 read -p "请输入ua: " ua
 read -p "请输入owsq: " owsq
 read -p "请输入ckP: " ckP
+read -p "请输入助力码，不需要助力则回车: " zlm
 echo $ck > ck.txt
 echo $ua > ua.txt
 echo $owsq > owsq.txt
 echo $ckP > ckP.txt
+echo $zlm > zlm.txt
 rm -rf ckerror.txt
 ./fqrk.sh
 ./fqrw.sh
@@ -30,10 +32,12 @@ read -p "请输入ck: " ck
 read -p "请输入ua: " ua
 read -p "请输入owsq: " owsq
 read -p "请输入ckP: " ckP
+read -p "请输入助力码，不需要助力则回车: " zlm
 echo $ck > ck.txt
 echo $ua > ua.txt
 echo $owsq > owsq.txt
 echo $ckP > ckP.txt
+echo $zlm > zlm.txt
 ./fqrk.sh
 ./fqrw.sh
 ./fqfr.sh
@@ -43,6 +47,14 @@ then echo $(cat ckerror.txt)
 fi
 fi
 ./owsq.sh
+zlm=$(cat zlm.txt)
+if [ -n "$zlm" ]
+then ./fqzlm.sh
+if [ -s ckerror.txt ]
+then echo $(cat ckerror.txt)
+fi
+else rm -rf zlm.txt zlg.txt
+fi
 while sleep 8
 do
 ./fqfr.sh
