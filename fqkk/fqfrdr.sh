@@ -19,6 +19,4 @@ echo $(cat fqfrdr.txt | grep -o "appid.*" | cut -d '&' -f1 | cut -d '=' -f2) > j
 echo $(cat fqfrdr.txt | grep -o "uri.*" | cut -d "%" -f4 | cut -c 3-) > ju.txt
 echo $(cat fqfrdr.txt | grep -o "%3D.*" | cut -d '&' -f1 | cut -c 4-) > ji.txt
 echo $(cat fqfrdr.txt | grep -o "state.*" | cut -d '&' -f1 | cut -d '=' -f2) > js.txt
-else dt=$(date '+%Y-%m-%d %H:%M:%S')
-echo $dt 未检测到微信授权，每天第一次阅读需要手动阅读进行微信授权，若已授权则检查是否黑号 > ckerror.txt
 fi
