@@ -15,14 +15,12 @@ rm -rf ckerror.txt
 ./fqrk.sh
 ./fqrw.sh
 ./fqfr.sh
-./fqrft.sh
 if [ -s ckerror.txt ]
 then echo $(cat ckerror.txt)
 fi
 else ./fqrk.sh
 ./fqrw.sh
 ./fqfr.sh
-./fqrft.sh
 if [ -s ckerror.txt ]
 then echo $(cat ckerror.txt)
 fi
@@ -41,7 +39,6 @@ echo $zlm > zlm.txt
 ./fqrk.sh
 ./fqrw.sh
 ./fqfr.sh
-./fqrft.sh
 if [ -s ckerror.txt ]
 then echo $(cat ckerror.txt)
 fi
@@ -61,17 +58,12 @@ while sleep 8
 do
 ./fqfr.sh
 ./fqrft.sh
+if [ $(grep -c '"num":0' fqrft.txt) -eq 1 ]
+then dt=$(date '+%Y-%m-%d %H:%M:%S')
+echo $dt 今日阅读次数为0，请先手动阅读1次进行微信授权 > ckerror.txt
+fi
 if [ ! -s ckerror.txt -a $(cat status.txt) -ne 4 -a $(cat status.txt) -ne 2 -a $(cat rest.txt) -ne 0 ]
-then if [ -s jkey.txt ]
-then ./fqfrdr2.sh
-./owa.sh
-./owar.sh
-./joj.sh
-./roj.sh
-./fqrft.sh
-clear
-echo $(cat rft.txt)
-else ./fqfrdr.sh
+then ./fqfrdr.sh
 ./owa.sh
 ./owar.sh
 ./joj.sh
@@ -80,12 +72,10 @@ else ./fqfrdr.sh
 clear
 echo $(cat rft.txt)
 fi
-else rm -rf jkey.txt
 if [ ! -s ckerror.txt ]
 then clear
 echo $(cat rft.txt)
 else clear
 echo $(cat ckerror.txt)
-fi
 fi
 done
