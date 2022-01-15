@@ -1,10 +1,4 @@
 cd ~
-if [ $(command -v wget | grep -c "wget") -lt 1 ]
-then yum update || apt update
-yes | yum upgrade || yes | apt upgrade
-yum update || apt update
-yum install wget -y || apt install wget -y
-fi
 read -p "请输入脚本地址开始安装脚本: " url
 echo $url > url.txt
 if [ $(grep -c "https://" url.txt) -eq 0 ]
@@ -19,6 +13,12 @@ echo 你确定这是我耳兔的脚本吗？别玩我了
 elif [ $(grep -c "install" url.txt) -eq 0 ]
 then rm -rf url.txt
 echo 真粗心，这可不是安装脚本的地址哦
+fi
+if [ $(command -v wget | grep -c "wget") -lt 1 ]
+then yum update || apt update
+yes | yum upgrade || yes | apt upgrade
+yum update || apt update
+yum install wget -y || apt install wget -y
 fi
 if [ -s url.txt ]
 then wurl=$(echo ${url%install*} | grep -o "https://.*")
