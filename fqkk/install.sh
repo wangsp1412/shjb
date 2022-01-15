@@ -1,5 +1,11 @@
 cd ~
-read -p "如你确认已安装wget，请输入脚本地址开始安装脚本: " url
+if [ $(command -v wget | grep -c "wget") -lt 1 ]
+then yum update || apt update
+yes | yum upgrade || yes | apt upgrade
+yum update || apt update
+yum install wget -y || apt install wget -y
+fi
+read -p "请输入脚本地址开始安装脚本: " url
 echo $url > url.txt
 if [ $(grep -c "https://" url.txt) -eq 0 ]
 then rm -rf url.txt
@@ -43,7 +49,7 @@ rm -rf curl.txt install.sh wjb.sh
 cd ~
 rm -rf url.txt
 echo "cd ~/$wjj
-./run.sh" > $wjj.sh
+./$wjj.sh" > $wjj.sh
 chmod +x $wjj.sh
 clear
 echo 脚本已安装完毕，请输入 ./$wjj.sh 运行脚本
