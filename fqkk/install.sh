@@ -49,7 +49,7 @@ rm -rf curl.txt install.sh wjb.sh
 cd ~
 rm -rf url.txt
 echo "cd ~/$wjj
-./$wjj.sh" > $wjj.sh
+./run.sh" > $wjj.sh
 chmod +x $wjj.sh
 clear
 echo 脚本已安装完毕，请输入 ./$wjj.sh 运行脚本
