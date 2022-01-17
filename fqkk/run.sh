@@ -81,7 +81,7 @@ ji=$(cat fqfrdr | grep -o "%3D.*" | cut -d '&' -f1 | cut -c 4-)
 js=$(cat fqfrdr | grep -o "state.*" | cut -d '&' -f1 | cut -d '=' -f2)
 else jkey=
 fi
-drm=$(cat fqfrdr | grep -o '"msg".*' | cut -d '"' -f4)
+drm=$(cat fqfrdr | grep -o "msg.*" | cut -d '"' -f3)
 }
 owa(){
 uuid=$(curl -s -H "Host: open.weixin.qq.com" -H "upgrade-insecure-requests: 1" -H "user-agent: $ua" -H "accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9" -H "sec-fetch-site: none" -H "sec-fetch-mode: navigate" -H "sec-fetch-user: ?1" -H "sec-fetch-dest: document" -H "accept-language: zh-CN,zh;q=0.9,en-US;q=0.8,en;q=0.7" --compressed "https://open.weixin.qq.com/connect/oauth2/authorize?appid=$ja&redirect_uri=http%3A%2F%2F$ju%2Ffast_reada%2Foiejr%3Fjumpid%3D$ji&response_type=code&scope=snsapi_userinfo&state=$js&connect_redirect=1&uin=$aou&key=$key&version=$ov&pass_ticket=$op" | grep -o "&uuid.*" | cut -d '&' -f2 | cut -d '=' -f2)
