@@ -27,13 +27,17 @@ xg(){
 _id=$(cat ev | grep -o "$pt_pin.*" | cut -d '"' -f5)
 if [ $(cat ev | grep -o "$pt_pin.*" | cut -d '"' -f21) = "remarks" ]
 then remarks=$(cat ev | grep -o "$pt_pin.*" | cut -d '"' -f23)
-ab='\"remarks\":\"$remarks\",'
+ab="\"remarks\":\"$remarks\","
 fi
 t=$(expr $(date +%s%N) / 1000000)
 d="{\"name\":\"JD_COOKIE\",\"value\":\"$jdc\",$ab\"_id\":\"$_id\"}"
 l=$(echo $d | wc -c) && l=$((l-1))
 curl -s -k -i --raw -o xg -X PUT -H "Host:$host" -H "Content-Length:$l" -H "Authorization:$qck" -H "User-Agent:Mozilla/5.0 (Linux; Android 10; V1838T) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.104 Mobile Safari/537.36" -H "Content-Type:application/json;charset=UTF-8" -d "$d" "http://$host/open/envs?t=$t"
-echo 已成功更新到青龙
+if [ $(cat xg | grep -c 'code":200') -eq 1 ]
+then echo 已成功更新到青龙
+else message=$(cat xg | grep -o "message.*" | cut -d '"' -f3)
+echo $message更新到青龙失败
+fi
 }
 cl(){
 echo "需要上传ptkey到青龙的请输入青龙常量，格式为
