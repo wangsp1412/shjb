@@ -129,7 +129,7 @@ else echo 已存在多个相同jdc，请联系你的代挂删除后重新添加
 fi
 else echo 你的JD_COOKIE为 $jdc
 fi
-else echo $err_msg请检查$mobile是否正确
+else echo $err_msg请检查手机号$mobile是否正确
 fi
 fi
 }
