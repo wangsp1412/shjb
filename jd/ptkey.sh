@@ -9,19 +9,14 @@ message=$(cat tk | grep -o "message.*" | cut -d '"' -f3)
 ev(){
 t=$(expr $(date +%s%N) / 1000000)
 curl -s -k -i --raw -o ev -X GET -H "Host:$host" -H "User-Agent:Mozilla/5.0 (Linux; Android 10; V1838T) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.104 Mobile Safari/537.36" -H "Authorization:$qck" "http://$host/open/envs?searchValue=&t=$t"
-if [ $(cat ev | grep -o "$pt_pin" | wc -l) -eq 0 ]
-then xz
-elif [ $(cat ev | grep -o "$pt_pin" | wc -l) -eq 1 ]
-then xg
-else echo 已存在多个相同jdc，请联系你的代挂删除后重新添加
-fi
 }
 xz(){
 t=$(expr $(date +%s%N) / 1000000)
 d="[{\"value\":\"$jdc\",\"name\":\"JD_COOKIE\"}]"
 l=$(echo $d | wc -c) && l=$((l-1))
 curl -s -k -i --raw -o xz -X POST -H "Host:$host" -H "Content-Length:$l" -H "Authorization:$qck" -H "User-Agent:Mozilla/5.0 (Linux; Android 10; V1838T) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.104 Mobile Safari/537.36" -H "Content-Type:application/json;charset=UTF-8" -d "$d" "http://$host/open/envs?t=$t"
-[ $(cat xz | grep -c '"_id"') -eq 1 ] && echo 已成功新增到青龙
+ev
+[ $(cat xz | grep -c '"_id"') -eq 1 -a $(cat ev | grep -o "$pt_key" | wc -l) -eq 1 ] && echo 已成功新增到青龙 || xz
 }
 xg(){
 _id=$(cat ev | grep -o "$pt_pin.*" | cut -d '"' -f5)
@@ -36,10 +31,12 @@ t=$(expr $(date +%s%N) / 1000000)
 d="{\"name\":\"JD_COOKIE\",\"value\":\"$jdc\",$ab\"_id\":\"$_id\"}"
 l=$(echo $d | wc -c) && l=$((l-1))
 curl -s -k -i --raw -o xg -X PUT -H "Host:$host" -H "Content-Length:$l" -H "Authorization:$qck" -H "User-Agent:Mozilla/5.0 (Linux; Android 10; V1838T) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.104 Mobile Safari/537.36" -H "Content-Type:application/json;charset=UTF-8" -d "$d" "http://$host/open/envs?t=$t"
-if [ $(cat xg | grep -c 'code":200') -eq 1 ]
+ev
+if [ $(cat xg | grep -c 'code":200') -eq 1 -a $(cat ev | grep -o "$pt_key" | wc -l) -eq 1 ]
 then echo 已成功更新到青龙
 else message=$(cat xg | grep -o "message.*" | cut -d '"' -f3)
 echo $message更新到青龙失败
+xg
 fi
 }
 cl(){
@@ -124,6 +121,12 @@ jdc="pt_key=$pt_key;pt_pin=$pt_pin;"
 if [ ! -z $tk ]
 then echo jdc获取成功接下来为你上传至青龙
 ev
+if [ $(cat ev | grep -o "$pt_pin" | wc -l) -eq 0 ]
+then xz
+elif [ $(cat ev | grep -o "$pt_pin" | wc -l) -eq 1 ]
+then xg
+else echo 已存在多个相同jdc，请联系你的代挂删除后重新添加
+fi
 else echo 你的JD_COOKIE为 $jdc
 fi
 else echo $err_msg请检查$mobile是否正确
