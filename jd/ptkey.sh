@@ -56,7 +56,7 @@ read -p "请输入手机号: " mobile
 stty echo
 a=$(echo $mobile | grep -o "[0-9]\+")
 b=$(echo $mobile | cut -c 1)
-if [ ${#mobile} -ne 11 -o ${#a} -ne 11 -o $b -ne 1 ]
+if [ ${#mobile} -ne 11 -o ${#a} -ne 11 -o $b != 1 ]
 then echo $mobile不是正确的手机号
 mobile=""
 fi
@@ -69,7 +69,7 @@ read -p "请输入手机号: " mobile
 stty echo
 a=$(echo $mobile | grep -o "[0-9]\+")
 b=$(echo $mobile | cut -c 1)
-if [ ${#mobile} -ne 11 -o ${#a} -ne 11 -o $b -ne 1 ]
+if [ ${#mobile} -ne 11 -o ${#a} -ne 11 -o $b != 1 ]
 then echo $mobile不是正确的手机号
 mobile=""
 fi
