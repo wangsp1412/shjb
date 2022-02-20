@@ -117,8 +117,8 @@ err_msg=$(cat pt | grep -o "err_msg.*" | cut -d '"' -f3)
 if [ -z $err_msg ]
 then pt_key=$(cat pt | grep -o "pt_key.*" | cut -d '"' -f3)
 pt_pin=$(cat pt | grep -o "pt_pin.*" | cut -d '"' -f3)
-jdc="pt_key=$pt_key;pt_pin=$pt_pin;"
-if [ ! -z $tk ]
+[ ! -z $pt_key -a ! -z $pt_pin ] && jdc="pt_key=$pt_key;pt_pin=$pt_pin;" || jdc=""
+if [ ! -z $tk -a ! -z $jdc ]
 then echo jdc获取成功接下来为你上传至青龙
 ev
 if [ $(cat ev | grep -o "$pt_pin" | wc -l) -eq 0 ]
@@ -127,7 +127,9 @@ elif [ $(cat ev | grep -o "$pt_pin" | wc -l) -eq 1 ]
 then xg
 else echo 已存在多个相同jdc，请联系你的代挂删除后重新添加
 fi
-else echo 你的JD_COOKIE为 $jdc
+elif [ ! -z $jdc ]
+then echo 你的JD_COOKIE为 $jdc
+else echo "jdc获取失败，若重新执行脚本还是一样获取失败，请到电报联系 @shoujiyanxisheatu_bot"
 fi
 else echo $err_msg请检查手机号$mobile是否正确
 fi
