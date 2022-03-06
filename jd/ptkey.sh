@@ -12,6 +12,12 @@ if [ ! -z $tk ]
 then read -p "慎用，有可能黑ip，需要检测青龙里ptkey有效性请输入y: " ycpk
 if [ "$ycpk" = "y" -o "$ycpk" = "Y" ]
 then echo > errorptkey
+if [ $(command -v jq | grep -c "jq") -lt 1 ]
+then yum update || apt update
+yes | yum upgrade || yes | apt upgrade
+yum update || apt update
+yum install jq -y || apt install jq -y
+fi
 ev
 e=$(($(cat ev | jq | grep -o "pt_key.*" | cut -d ";" -f1 | wc -l)+1))
 for ((s=1;s<e;s++))
