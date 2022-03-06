@@ -5,10 +5,31 @@ tk=$(cat tk | grep -o "token.*" | cut -d '"' -f3)
 qck="$tt $tk"
 message=$(cat tk | grep -o "message.*" | cut -d '"' -f3)
 [ -z $tk ] && echo $message请检查青龙常量$qlcl || echo 青龙token获取成功
+cpk
+}
+cpk(){
+if [ ! -z $tk ]
+then read -p "慎用，有可能黑ip，需要检测青龙里ptkey有效性请输入y: " ycpk
+if [ "$ycpk" = "y" -o "$ycpk" = "Y" ]
+then echo > errorptkey
+ev
+e=$(($(cat ev | jq | grep -o "pt_key.*" | cut -d ";" -f1 | wc -l)+1))
+for ((s=1;s<e;s++))
+do
+cpk=$(cat ev | jq | grep -o "pt_key.*" | cut -d ";" -f1 | sed -n "$s"p)
+msg=$(curl -s -X GET -H "Host:wq.jd.com" -H "user-agent:Mozilla/5.0 (Linux; Android 10; FRL-AN00a Build/HUAWEIFRL-AN00a; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/88.0.4324.93 Mobile Safari/537.36 hap/1080/huawei com.huawei.fastapp/11.6.1.301 com.jd.quickApp/2.2.3 ({"packageName":"search","type":"url","extra":"{}"})" -H "referer:https://wqs.jd.com/my" -H "cookie:$cpk" "https://wq.jd.com/user/info/QueryJDUserInfo?sceneval=2&callback=getUserInfoCb" | grep "msg" | cut -d '"' -f4)
+echo 第$s个ptkey为$msg
+[ $(echo $msg | grep -c "no login") -eq 1 ] && echo $(date '+%Y-%m-%d %H:%M:%S') $cpk >> errorptkey
+[ $(echo $msg | grep -c "msg") -eq 1 ] && s=$((s-1))
+sleep 0
+done
+echo "检测完成，有$(($(cat errorptkey | wc -l)-1))个失效ptkey，请在脚本结束后执行 cat errorptkey 查看"
+fi
+fi
 }
 ev(){
 t=$(expr $(date +%s%N) / 1000000)
-curl -s -k -i --raw -o ev -X GET -H "Host:$host" -H "User-Agent:Mozilla/5.0 (Linux; Android 10; V1838T) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.104 Mobile Safari/537.36" -H "Authorization:$qck" "http://$host/open/envs?searchValue=&t=$t"
+curl -s -o ev -X GET -H "Host:$host" -H "User-Agent:Mozilla/5.0 (Linux; Android 10; V1838T) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.104 Mobile Safari/537.36" -H "Authorization:$qck" "http://$host/open/envs?searchValue=&t=$t"
 }
 xz(){
 t=$(expr $(date +%s%N) / 1000000)
