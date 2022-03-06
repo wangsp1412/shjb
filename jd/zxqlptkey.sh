@@ -31,7 +31,7 @@ yum update || apt update
 yum install jq -y || apt install jq -y
 fi
 e=$((zs+1))
-for ((s=1;s<e;s++))
+for ((s=1; s<e; s++))
 do
 ptkey=$(cat ev | jq | grep -o "pt_key.*" | cut -d ";" -f1 | sed -n "$s"p)
 curl -s -X GET -H "Host:plogin.m.jd.com" -H "user-agent:Mozilla/5.0 (Linux; Android 10; FRL-AN00a Build/HUAWEIFRL-AN00a; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/88.0.4324.93 Mobile Safari/537.36 hap/1080/huawei com.huawei.fastapp/11.6.1.301 com.jd.quickApp/2.2.3 ({"packageName":"search","type":"url","extra":"{}"})" -H "cookie:$ptkey" "https://plogin.m.jd.com/cgi-bin/ml/mlogout"
