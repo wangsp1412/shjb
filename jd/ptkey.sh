@@ -20,7 +20,7 @@ yum install jq -y || apt install jq -y
 fi
 ev
 e=$(($(cat ev | jq | grep -o "pt_key.*" | cut -d ";" -f1 | wc -l)+1))
-for ((s=1;s<e;s++))
+for ((s=1; s<e; s++))
 do
 cpk=$(cat ev | jq | grep -o "pt_key.*" | cut -d ";" -f1 | sed -n "$s"p)
 cpp=$(cat ev | jq | grep -o "pt_pin.*" | cut -d ";" -f1 | sed -n "$s"p)
