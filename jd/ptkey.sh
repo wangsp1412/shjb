@@ -23,7 +23,8 @@ e=$(($(cat ev | jq | grep -o "pt_key.*" | cut -d ";" -f1 | wc -l)+1))
 for ((s=1;s<e;s++))
 do
 cpk=$(cat ev | jq | grep -o "pt_key.*" | cut -d ";" -f1 | sed -n "$s"p)
-msg=$(curl -s -X GET -H "Host:wq.jd.com" -H "user-agent:Mozilla/5.0 (Linux; Android 10; FRL-AN00a Build/HUAWEIFRL-AN00a; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/88.0.4324.93 Mobile Safari/537.36 hap/1080/huawei com.huawei.fastapp/11.6.1.301 com.jd.quickApp/2.2.3 ({"packageName":"search","type":"url","extra":"{}"})" -H "referer:https://wqs.jd.com/my" -H "cookie:$cpk" "https://wq.jd.com/user/info/QueryJDUserInfo?sceneval=2&callback=getUserInfoCb" | grep "msg" | cut -d '"' -f4)
+cpp=$(cat ev | jq | grep -o "pt_pin.*" | cut -d ";" -f1 | sed -n "$s"p)
+msg=$(curl -s -X GET -H "Host:wq.jd.com" -H "user-agent:Mozilla/5.0 (Linux; Android 10; FRL-AN00a Build/HUAWEIFRL-AN00a; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/88.0.4324.93 Mobile Safari/537.36 hap/1080/huawei com.huawei.fastapp/11.6.1.301 com.jd.quickApp/2.2.3 ({"packageName":"search","type":"url","extra":"{}"})" -H "referer:https://wqs.jd.com/my" -H "cookie:$cpk" -H "cookie:$cpp" "https://wq.jd.com/user/info/QueryJDUserInfo?sceneval=2&callback=getUserInfoCb" | grep "msg" | cut -d '"' -f4)
 echo 第$s个ptkey为$msg
 [ $(echo $msg | grep -c "no login") -eq 1 ] && echo $(date '+%Y-%m-%d %H:%M:%S') $cpk >> errorptkey
 [ $(echo $msg | grep -c "msg") -eq 1 ] && s=$((s-1))
