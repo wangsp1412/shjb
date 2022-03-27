@@ -8,5 +8,6 @@ host=$(echo $url | cut -d "/" -f3)
 path=$(echo $url | grep -o "/if5ax.*")
 echo "请去修改你的v2ray
 ip与host改为 $(echo $host | cut -d ":" -f1)
+端口为 $(echo $host | cut -d ":" -f2)
 path改为
 $path"
