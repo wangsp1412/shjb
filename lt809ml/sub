@@ -1,4 +1,3 @@
-sudo -i
 if [ $(command -v x-ui | grep -c "x-ui") -lt 1 ]
 then echo 未安装x-ui，请先安装x-ui，并替换好809专用xray内核，再新建ws443节点，接着重新运行此脚本
 else if [ $(command -v wget | grep -c "wget") -lt 1 -o $(command -v nginx | grep -c "nginx") -lt 1 ]
