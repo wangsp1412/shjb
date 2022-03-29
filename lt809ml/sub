@@ -28,7 +28,7 @@ echo -n "vmess://$config" | base64 -w 0 > $nginxroot/809
 chmod +x ~/lt809ml/sub
 if [ $(crontab -l | grep "lt809ml/sub" | wc -l) -lt 1 ]
 then crontab -l > crontablist
-echo "0 0-23/3 * * * /root/lt809ml/sub" >> crontablist
+echo "0 0-23/1 * * * /root/lt809ml/sub" >> crontablist
 crontab crontablist
 rm -rf crontablist
 fi
